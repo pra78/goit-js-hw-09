@@ -3,13 +3,10 @@ import flatpickr from "flatpickr";
 // Додатковий імпорт стилів
 import "flatpickr/dist/flatpickr.min.css";
 
-const buttonStart = document.querySelector('[data-start]');
+const buttonStart = document.querySelector('button[data-start]');
 const clockFace = document.querySelectorAll('.field .value')
 
-
-clockFace[0].dataset.days.value = 15;
-
-buttonStart.addEventListener('click', onStartButtonClick)
+buttonStart.addEventListener('click', onStartButtonClick);
 
 buttonStart.disabled = true;
 
@@ -30,9 +27,23 @@ const options = {
 const fp = flatpickr("#datetime-picker", { ...options });
 
 function onStartButtonClick() {
-    console.log(fp.selectedDates[0] - Date.now())
-}
+    buttonStart.disabled = true;
+    const countDownTimerTarget = fp.selectedDates[0];
 
+    const intervalId = setInterval(() => { 
+        const currentTime = Date.now();
+        const deltaTime = countDownTimerTarget - currentTime;
+        if (deltaTime < 0) {
+            deltaTime = 0;
+            clearInterval(intervalId);
+        }
+        const { days, hours, minutes, seconds } = convertMs(deltaTime);
+        clockFace[0].textContent = days;
+        clockFace[1].textContent = addLeadingZero(hours);
+        clockFace[2].textContent = addLeadingZero(minutes);
+        clockFace[3].textContent = addLeadingZero(seconds);
+    }, 1000);
+}
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -53,10 +64,6 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-// console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-// console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-// console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
-
 function addLeadingZero(value) {
-
+    return String(value).padStart(2, "0");
 }
