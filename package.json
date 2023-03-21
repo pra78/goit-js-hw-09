@@ -2,7 +2,7 @@
   "name": "parcel-project-template",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://github.com/pra78/goit-js-hw-09.git",
+  "homepage": "https://pra78.github.io/goit-js-hw-09/",
   "scripts": {
     "start": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /goit-js-hw-09.git/"
@@ -12,7 +12,7 @@
     "url": "git+https://github.com/pra78/goit-js-hw-09.git"
   },
   "keywords": [],
-  "author": "Alexander Repeta <alexander.repeta@gmail.com>",
+  "author": "PR <iosdev506@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/goitacademy/parcel-project-template/issues"
