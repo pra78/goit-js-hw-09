@@ -28,8 +28,3 @@
   },
   "browserslist": "> 0.5%, last 2 versions, not dead"
 }
-
-"homepage": "https://your_username.github.io/your_repo_name/",
-"scripts": {
-  "build": "parcel build src/*.html --public-url /your_repo_name/"
-},
