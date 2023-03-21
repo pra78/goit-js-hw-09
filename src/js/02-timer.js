@@ -17,6 +17,8 @@ const options = {
     enableTime: true,
     time_24hr: true,
     defaultDate: new Date(),
+    // замість window.alert() більш юзер-френдлі було б:
+    // minDate: Date.now(),
     minuteIncrement: 1,
     onClose(selectedDates) {
         if (selectedDates[0] <= Date.now()) {
