@@ -2,6 +2,9 @@
 import flatpickr from "flatpickr";
 // Додатковий імпорт стилів
 import "flatpickr/dist/flatpickr.min.css";
+// Notiflix for client-side non-blocking notifications, popup boxes...
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 
 const buttonStart = document.querySelector('button[data-start]');
 const clockFace = document.querySelectorAll('.field .value')
@@ -17,7 +20,7 @@ const options = {
     minuteIncrement: 1,
     onClose(selectedDates) {
         if (selectedDates[0] <= Date.now()) {
-            window.alert("Please choose a date in the future");
+            Notify.failure("Please choose a date in the future");
         } else {
             buttonStart.disabled = false;
         }
