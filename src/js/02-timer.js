@@ -29,7 +29,7 @@ const options = {
     },
 };
 
-const fp = flatpickr("#datetime-picker", { ...options });
+const fp = flatpickr("#datetime-picker", options);
 
 function onStartButtonClick() {
     buttonStart.disabled = true;
