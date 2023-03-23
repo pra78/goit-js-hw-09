@@ -7,7 +7,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 
 const buttonStart = document.querySelector('button[data-start]');
-const clockFace = document.querySelectorAll('.field .value')
+const clockFace = document.querySelectorAll('.field .value');
 
 buttonStart.addEventListener('click', onStartButtonClick);
 
@@ -37,16 +37,15 @@ function onStartButtonClick() {
 
     const intervalId = setInterval(() => { 
         const currentTime = Date.now();
-        const deltaTime = countDownTimerTarget - currentTime;
+        let deltaTime = countDownTimerTarget - currentTime;
         if (deltaTime < 0) {
             deltaTime = 0;
             clearInterval(intervalId);
         }
-        const { days, hours, minutes, seconds } = convertMs(deltaTime);
-        clockFace[0].textContent = days;
-        clockFace[1].textContent = addLeadingZero(hours);
-        clockFace[2].textContent = addLeadingZero(minutes);
-        clockFace[3].textContent = addLeadingZero(seconds);
+        const timeToBeDisplayed = convertMs(deltaTime);
+        const timeKeys = Object.keys(timeToBeDisplayed);
+
+        clockFace.forEach((el, idx) => el.textContent = addLeadingZero(timeToBeDisplayed[timeKeys[idx]]));
     }, 1000);
 }
 
