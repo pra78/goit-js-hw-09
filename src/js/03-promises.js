@@ -2,9 +2,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const form = document.querySelector('form');
 
-const createPromisesBtn = document.querySelector('button');
-
-createPromisesBtn.addEventListener('click', onSubmitButtonPressed);
+form.addEventListener('submit', onSubmitButtonPressed);
 
 function onSubmitButtonPressed(event) {
   event.preventDefault();
