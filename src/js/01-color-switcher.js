@@ -15,12 +15,17 @@ function onStartButtonClick() {
   intervalId = setInterval(() => {
     document.body.style.backgroundColor = getRandomHexColor();
   }, 1000);
-  buttonStart.disabled = true;
-  buttonStop.disabled = false;
+  buttonDisabledToggle(buttonStart, buttonStop);
 };
 
 function onStopButtonClick() { 
   clearInterval(intervalId);
-  buttonStart.disabled = false;
-  buttonStop.disabled = true;
+  buttonDisabledToggle(buttonStart, buttonStop);
 };
+
+function buttonDisabledToggle(button1, button2) {
+  if (button1.disabled) {
+    return button1.disabled = false, button2.disabled = true;
+  }
+  return button1.disabled = true, button2.disabled = false;
+}
