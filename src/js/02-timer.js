@@ -5,13 +5,13 @@ import "flatpickr/dist/flatpickr.min.css";
 // Notiflix for client-side non-blocking notifications, popup boxes...
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-
 const buttonStart = document.querySelector('button[data-start]');
 const clockFace = document.querySelectorAll('.field .value');
 
 buttonStart.addEventListener('click', onStartButtonClick);
 
 buttonStart.disabled = true;
+let canStartTimer = true;
 
 const options = {
     enableTime: true,
@@ -24,7 +24,7 @@ const options = {
         if (selectedDates[0] <= Date.now()) {
             Notify.failure("Please choose a date in the future");
         } else {
-            buttonStart.disabled = false;
+            buttonStart.disabled = canStartTimer ? false : true;
         }
     },
 };
@@ -36,15 +36,16 @@ function onStartButtonClick() {
     const countDownTimerTarget = fp.selectedDates[0];
 
     const intervalId = setInterval(() => { 
+        canStartTimer = false;
         const currentTime = Date.now();
         let deltaTime = countDownTimerTarget - currentTime;
         if (deltaTime < 0) {
             deltaTime = 0;
             clearInterval(intervalId);
+            canStartTimer = true;
         }
         const timeToBeDisplayed = convertMs(deltaTime);
         const timeKeys = Object.keys(timeToBeDisplayed);
-
         clockFace.forEach((el, idx) => el.textContent = addLeadingZero(timeToBeDisplayed[timeKeys[idx]]));
     }, 1000);
 }
