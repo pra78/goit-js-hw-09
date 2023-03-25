@@ -11,7 +11,9 @@ const clockFace = document.querySelectorAll('.field .value');
 buttonStart.addEventListener('click', onStartButtonClick);
 
 buttonStart.disabled = true;
-let canStartTimer = true;
+// let canStartTimer = true;
+
+let intervalId;
 
 const options = {
     enableTime: true,
@@ -24,7 +26,8 @@ const options = {
         if (selectedDates[0] <= Date.now()) {
             Notify.failure("Please choose a date in the future");
         } else {
-            buttonStart.disabled = canStartTimer ? false : true;
+            buttonStart.disabled = false;
+            // buttonStart.disabled = canStartTimer ? false : true;
         }
     },
 };
@@ -35,14 +38,18 @@ function onStartButtonClick() {
     buttonStart.disabled = true;
     const countDownTimerTarget = fp.selectedDates[0];
 
-    const intervalId = setInterval(() => { 
+    if (intervalId) {
+        clearInterval(intervalId);
+    }
+
+    intervalId = setInterval(() => { 
         canStartTimer = false;
         const currentTime = Date.now();
         let deltaTime = countDownTimerTarget - currentTime;
         if (deltaTime < 0) {
             deltaTime = 0;
             clearInterval(intervalId);
-            canStartTimer = true;
+            // canStartTimer = true;
         }
         const timeToBeDisplayed = convertMs(deltaTime);
         const timeKeys = Object.keys(timeToBeDisplayed);
