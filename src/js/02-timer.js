@@ -43,7 +43,7 @@ function onStartButtonClick() {
     }
 
     intervalId = setInterval(() => { 
-        canStartTimer = false;
+        // canStartTimer = false;
         const currentTime = Date.now();
         let deltaTime = countDownTimerTarget - currentTime;
         if (deltaTime < 0) {
